@@ -2,24 +2,14 @@ const Mailer = require("./mailer");
 const smsService = require("./sms-service");
 const PushNotification = require("./push-notification");
 
-class Context {
-  setStrategy(strategy) {
-    this.strategy = strategy;
-  }
-
-  send(message) {
-    this.strategy.sendMessage(message);
-  }
+function send(message) {
+  this.sendMessage(message);
 }
 
-const contextMailer = new Context();
-contextMailer.setStrategy(new Mailer());
-contextMailer.send("Hello world!");
+const sendMail = send.bind(new Mailer());
+const sendSMS = send.bind(smsService);
+const sendPush = send.bind(new PushNotification());
 
-const contextSMSService = new Context();
-contextSMSService.setStrategy(smsService);
-contextSMSService.send("Hello world!");
-
-const contextPushNotification = new Context();
-contextPushNotification.setStrategy(new PushNotification());
-contextPushNotification.send("Hello world!");
+sendMail("Hello world!");
+sendSMS("Hello world!");
+sendPush("Hello world!");
