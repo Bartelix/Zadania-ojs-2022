@@ -3,3 +3,5 @@ const smsService = {
     console.log(`Sending SMS message - ${message}`);
   },
 };
+
+module.exports = smsService;

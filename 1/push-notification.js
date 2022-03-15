@@ -3,3 +3,5 @@ class PushNotification {
     console.log(`Sending push notification - ${message}`);
   }
 }
+
+module.exports = PushNotification;
